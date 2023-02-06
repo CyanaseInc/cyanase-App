@@ -103,13 +103,13 @@ class _RiskProfileState extends State<RiskProfile> {
                 ),
               ],
             ),
-            const Center(
+            Center(
               child: Text(
-                "RiskProfile",
+                "Investment Settings",
                 style: TextStyle(
-                  color: Colors.black,
+                  color: kprimary,
                   fontFamily: 'MontserratExtraBold',
-                  fontSize: 24.0,
+                  fontSize: 20.0,
                   fontWeight: FontWeight.w600,
                 ),
               ),
@@ -146,34 +146,93 @@ class _RiskProfileState extends State<RiskProfile> {
         height: 70.0,
         padding: EdgeInsets.symmetric(
           vertical: 8.0,
-          horizontal: kpadding,
+          horizontal: kpadding / 2,
         ),
         width: size.width,
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            SizedBox(
-              width: size.width * 0.8,
-              child: QuickMaterialButton(
-                  text: currentIndex >= (RiskProfilesSides.length - 1)
-                      ? "Reconcile"
-                      : RiskProfilesSides[currentIndex].btnText,
-                  pressed: () {
-                    if (currentIndex < (RiskProfilesSides.length - 1)) {
-                      var newpage = currentIndex + 1;
-                      goToPage(newpage);
-                      setState(() {
-                        currentIndex = newpage;
-                      });
-                    } else {
-                      // Navigator.pushNamed(context, '/home');
-                      print("Reconsiled....");
-                    }
-                  }),
-            ),
+            currentIndex > 0
+                ? SizedBox(
+                    width: currentIndex == (RiskProfilesSides.length - 1)
+                        ? size.width * 0.90
+                        : size.width * 0.40,
+                    child: QuickMaterialButton(
+                        text: "Previous",
+                        pressed: () {
+                          if (currentIndex > 0) {
+                            var newpage = (currentIndex - 1);
+                            // print(newpage);
+                            goToPage(newpage);
+                            setState(() {
+                              currentIndex = newpage;
+                            });
+                          } else {
+                            // Navigator.pushNamed(context, '/home');
+                            print("Goal created....");
+                          }
+                        }),
+                  )
+                : const SizedBox.shrink(),
+            currentIndex == (RiskProfilesSides.length - 1)
+                ? const SizedBox.shrink()
+                : SizedBox(
+                    width: currentIndex == 0
+                        ? size.width * 0.80
+                        : size.width * 0.40,
+                    child: QuickMaterialButton(
+                        text: currentIndex >= (RiskProfilesSides.length - 1)
+                            ? "Finish"
+                            : RiskProfilesSides[currentIndex].btnText,
+                        pressed: () {
+                          if (currentIndex < (RiskProfilesSides.length - 1)) {
+                            var newpage = currentIndex + 1;
+                            goToPage(newpage);
+                            setState(() {
+                              currentIndex = newpage;
+                            });
+                          } else {
+                            // Navigator.pushNamed(context, '/home');
+                            print("Goal created....");
+                          }
+                        }),
+                  ),
           ],
         ),
       ),
+
+      // Container(
+      //   height: 70.0,
+      //   padding: EdgeInsets.symmetric(
+      //     vertical: 8.0,
+      //     horizontal: kpadding,
+      //   ),
+      //   width: size.width,
+      //   child: Row(
+      //     mainAxisAlignment: MainAxisAlignment.center,
+      //     children: [
+      //       SizedBox(
+      //         width: size.width * 0.8,
+      //         child: QuickMaterialButton(
+      //             text: currentIndex >= (RiskProfilesSides.length - 1)
+      //                 ? "Reconcile"
+      //                 : RiskProfilesSides[currentIndex].btnText,
+      //             pressed: () {
+      //               if (currentIndex < (RiskProfilesSides.length - 1)) {
+      //                 var newpage = currentIndex + 1;
+      //                 goToPage(newpage);
+      //                 setState(() {
+      //                   currentIndex = newpage;
+      //                 });
+      //               } else {
+      //                 // Navigator.pushNamed(context, '/home');
+      //                 print("Reconsiled....");
+      //               }
+      //             }),
+      //       ),
+      //     ],
+      //   ),
+      // ),
     );
   }
 
