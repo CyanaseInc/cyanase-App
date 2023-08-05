@@ -78,7 +78,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
         body: TabBarView(
           controller: _tabController,
           children: List.generate(hometabs.length, (index) {
-            return hometabs[index].tab;
+            return hometabs[index].tab;    
           }),
         ),
         bottomNavigationBar: showTab
